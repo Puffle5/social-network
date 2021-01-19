@@ -1,0 +1,208 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<title>Profile</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css}" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{https://www.w3schools.com/w3css/4/w3.css}">
+<link rel="stylesheet" th:href="@{https://www.w3schools.com/lib/w3-theme-blue-grey.css}">
+<link rel='stylesheet' th:href='@{https://fonts.googleapis.com/css?family=Open+Sans}'>
+<link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="./home-template/style.css">
+<link rel="stylesheet" href="styles/test.css">
+
+
+<body>
+<div class="BGimage"></div>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-main">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a th:href="@{/}"><img id="illLogo" src="images/logo_invert_small.png" height="60" width="40"></a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-main">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="profile-button" th:href="@{/swagger-ui.html}">API</a></li>
+                <li><a class="profile-button" th:href="@{/profile/new-feeds}">News Feed</a></li>
+                <li><a class="profile-button" th:href="@{/admin}" sec:authorize="hasRole('ROLE_ADMIN')">Admin Panel</a></li>
+                <li><a class="profile-button" th:href="@{/profile/settings}">Settings</a></li>
+                <li><a class="profile-button" th:href="@{/logout}">Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br/>
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px; margin-top:80px">
+    <!-- The Grid -->
+    <div class="w3-row">
+        <!-- Left Column -->
+        <div class="w3-col m3">
+            <!-- Profile -->
+
+            <div class="author-card pb-3 fadeInLeft">
+
+                <div class="author-card-cover"><img class="author-card-cover"
+                                                    th:src="@{'/images/' + ${user.coverPhotoURL}}" src="image.jpg"
+                                                    th:alt="${user.username}"></div>
+                <div class="author-card-profile"></div>
+                <div class="author-card-profile">
+                    <div class="author-card-avatar">
+                        <img th:src="@{'/images/' + ${user.photoURL}}" src="image.jpg" alt="Daniel Adams">
+                    </div>
+                    <div class="author-card-details">
+                        <h3 class="author-card-name text-lg" th:text="${user.username}"></h3>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <br>
+
+            <!--<div class="w3-col" style="overflow: hidden; height: 334px">-->
+                <div class="imagesCont fadeInLeft">
+                    <ul class="images">
+                    	<div>Friends</div>
+                    	<div id="noFriends"></div>
+                    		<li id = "imagesRow1">
+                    		</li>
+                    		<li id = "imagesRow2">
+                    		</li>
+                    		<li id = "imagesRow3">
+                    		</li>
+                    	</ul>
+                </div>
+            <!--</div>-->
+
+
+            <!-- End Left Column -->
+        </div>
+
+        <!-- Middle Column -->
+        <div class="w3-col m7">
+
+            <div class="w3-row-padding">
+                <div class="w3-col m12">
+                    <div class="w3-card w3-white fadeIn">
+                        <div class="w3-container w3-padding ">
+                            <h6 class="w3-opacity">Share your art!</h6>
+                            <button type="button" class="w3-button w3-theme" data-toggle="modal"
+                                    data-target="#myPostModal">
+                                New Post
+                            </button>
+
+
+
+
+                            <div class="modal fade" id="myPostModal" role="dialog" tabindex="-1">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                <span>&times;</span>
+                                            </button>
+                                            <h4 class="modal-title">Add New Post</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="POST" enctype="multipart/form-data" class="form-horizontal"
+                                                  id="post-picture">
+
+                                                <div class="form-group">
+                                                    <div style="position: relative; left: 20%;">
+                                                    <input type="radio" name="status" value="public"> Public &emsp;
+                                                    <input type="radio" name="status" value="private"> Private <br><br>
+                                                    </div>
+                                                    <label for="post-title-news" class="control-label col-md-4">Post
+                                                        Title</label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" id="post-title-news" th:name="title"
+                                                               class="form-control"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="post-description-news" class="control-label col-md-4">Post
+                                                        Description</label>
+                                                    <div class="col-md-8">
+                                                        <textarea cols="" rows="5" id="post-description-news"
+                                                                  th:name="description" class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <div class="col-md-offset-4 col-md-8">
+
+                                                        <input type="file" name="files" id="file-input-home"/><br/><br/>
+                                                        <input type="submit" class="btn btn-primary" value="Create"
+                                                               id="upload-post-picture-news"/>
+
+
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                            </div>
+                                    </div>
+                                </div>
+                               </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="personal-posts">
+
+            </div>
+            <!-- End Middle Column -->
+        </div>
+
+        <!-- Right Column -->
+        <div id="requests" class="w3-col m2">
+
+        </div>
+
+        <!-- End Grid -->
+    </div>
+
+    <!-- End Page Container -->
+</div>
+<br>
+
+<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js}"></script>
+<script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script th:src="@{/scripts/check-like-script.js}"></script>
+
+<link rel="stylesheet" th:href="@{/settings/settings.css}">
+<link rel="stylesheet" th:href="@{/profile-template/css/profile.css}">
+
+
+<script th:src="@{scripts/requests-script.js}"></script>
+
+</body>
+</html>

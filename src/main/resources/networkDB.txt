@@ -1,0 +1,127 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               10.4.8-MariaDB - mariadb.org binary distribution
+-- Server OS:                    Win64
+-- HeidiSQL Version:             10.2.0.5599
+-- --------------------------------------------------------
+use `social-network`;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+-- Dumping structure for table social-network.authorities
+CREATE TABLE IF NOT EXISTS `authorities` (
+                                             `id` int(11) NOT NULL AUTO_INCREMENT,
+                                             `username` varchar(255) NOT NULL,
+                                             `authority` varchar(11) NOT NULL,
+                                             UNIQUE KEY `username_authority` (`username`,`authority`),
+                                             KEY `FK_users` (`id`),
+                                             CONSTRAINT `FK_users` FOREIGN KEY (`id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table social-network.authorities: ~1 rows (approximately)
+/*!40000 ALTER TABLE `authorities` DISABLE KEYS */;
+INSERT INTO `authorities` (`id`, `username`, `authority`) VALUES
+(1, '123', 'ROLE_USER');
+/*!40000 ALTER TABLE `authorities` ENABLE KEYS */;
+
+-- Dumping structure for table social-network.comments
+CREATE TABLE IF NOT EXISTS `comments` (
+                                          `id` int(11) NOT NULL AUTO_INCREMENT,
+                                          `active` bit(1) DEFAULT NULL,
+                                          `content` varchar(255) DEFAULT NULL,
+                                          `date` datetime DEFAULT NULL,
+                                          `post_id` int(11) DEFAULT NULL,
+                                          `user_id` int(11) DEFAULT NULL,
+                                          PRIMARY KEY (`id`),
+                                          KEY `FKh4c7lvsc298whoyd4w9ta25cr` (`post_id`),
+                                          KEY `FK8omq0tc18jd43bu5tjh6jvraq` (`user_id`),
+                                          CONSTRAINT `FK8omq0tc18jd43bu5tjh6jvraq` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+                                          CONSTRAINT `FKh4c7lvsc298whoyd4w9ta25cr` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table social-network.comments: ~0 rows (approximately)
+/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
+
+-- Dumping structure for table social-network.likes
+CREATE TABLE IF NOT EXISTS `likes` (
+                                       `id` int(11) NOT NULL AUTO_INCREMENT,
+                                       `active` bit(1) DEFAULT NULL,
+                                       `post_id` int(11) DEFAULT NULL,
+                                       `user_id` int(11) DEFAULT NULL,
+                                       PRIMARY KEY (`id`),
+                                       KEY `FKry8tnr4x2vwemv2bb0h5hyl0x` (`post_id`),
+                                       KEY `FKnvx9seeqqyy71bij291pwiwrg` (`user_id`),
+                                       CONSTRAINT `FKnvx9seeqqyy71bij291pwiwrg` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+                                       CONSTRAINT `FKry8tnr4x2vwemv2bb0h5hyl0x` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table social-network.likes: ~0 rows (approximately)
+/*!40000 ALTER TABLE `likes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `likes` ENABLE KEYS */;
+
+-- Dumping structure for table social-network.posts
+CREATE TABLE IF NOT EXISTS `posts` (
+                                       `id` int(11) NOT NULL AUTO_INCREMENT,
+                                       `active` bit(1) DEFAULT NULL,
+                                       `date` datetime DEFAULT NULL,
+                                       `description` varchar(255) DEFAULT NULL,
+                                       `photo_url` varchar(255) DEFAULT NULL,
+                                       `user_id` int(11) DEFAULT NULL,
+                                       `title` varchar(255) DEFAULT NULL,
+                                       `status` int(11) DEFAULT NULL,
+                                       PRIMARY KEY (`id`),
+                                       KEY `FK5lidm6cqbc7u4xhqpxm898qme` (`user_id`),
+                                       CONSTRAINT `FK5lidm6cqbc7u4xhqpxm898qme` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table social-network.posts: ~4 rows (approximately)
+/*!40000 ALTER TABLE `posts` DISABLE KEYS */;
+INSERT INTO `posts` (`id`, `active`, `date`, `description`, `photo_url`, `user_id`, `title`, `status`) VALUES
+(1, b'1', '2019-10-23 08:37:28', 'This is a post.', NULL, 1, 'I Am Here For You', NULL),
+(2, b'1', '2019-10-23 08:38:24', 'Another post.', NULL, NULL, 'Created Post', NULL),
+(3, b'1', '2019-10-23 10:29:51', '', NULL, 1, '', NULL),
+(4, b'1', '2019-10-23 10:32:07', 'Meh', NULL, 1, 'We will meet again and you will lose', NULL);
+/*!40000 ALTER TABLE `posts` ENABLE KEYS */;
+
+-- Dumping structure for table social-network.relationships
+CREATE TABLE IF NOT EXISTS `relationships` (
+                                               `id` int(11) NOT NULL AUTO_INCREMENT,
+                                               `status` int(11) DEFAULT NULL,
+                                               `first_user_id` int(11) DEFAULT NULL,
+                                               `second_user_id` int(11) DEFAULT NULL,
+                                               PRIMARY KEY (`id`),
+                                               KEY `FK6nqsj72m0dwmfjwcj21f4cvhe` (`first_user_id`),
+                                               KEY `FKr3an7nowkme4329dlrkp3uqtv` (`second_user_id`),
+                                               CONSTRAINT `FK6nqsj72m0dwmfjwcj21f4cvhe` FOREIGN KEY (`first_user_id`) REFERENCES `users` (`id`),
+                                               CONSTRAINT `FKr3an7nowkme4329dlrkp3uqtv` FOREIGN KEY (`second_user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table social-network.relationships: ~0 rows (approximately)
+/*!40000 ALTER TABLE `relationships` DISABLE KEYS */;
+/*!40000 ALTER TABLE `relationships` ENABLE KEYS */;
+
+-- Dumping structure for table social-network.users
+CREATE TABLE IF NOT EXISTS `users` (
+                                       `id` int(11) NOT NULL AUTO_INCREMENT,
+                                       `active` bit(1) DEFAULT NULL,
+                                       `cover_photo_url` varchar(255) DEFAULT NULL,
+                                       `password` varchar(255) DEFAULT NULL,
+                                       `photo_url` varchar(255) DEFAULT NULL,
+                                       `username` varchar(60) DEFAULT NULL,
+                                       `enabled` tinyint(4) NOT NULL,
+                                       PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table social-network.users: ~1 rows (approximately)
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `active`, `cover_photo_url`, `password`, `photo_url`, `username`, `enabled`) VALUES
+(1, b'1', 'default_cover.jpg', '$2a$10$gpwHP5P/0pmyLUXiIEQkw.UbOqhgdH5DQ52shTx/36Feva6YcZEOa', 'default_profile.jpg', '123', 1);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

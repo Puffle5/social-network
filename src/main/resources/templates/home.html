@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Courgette"/>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Arvo"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="./home-template/style.css" rel="stylesheet">
+    <link href="./login-template/css/main.css" rel="stylesheet">
+    <link href="styles/test.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-main">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a th:href="@{/}"><img id="illLogo" src="images/logo_invert_small.png" height="60" width="40" class="img-responsive"></a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-main">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="login100-form-btn" th:href="@{/swagger-ui.html}">API</a></li>
+                <li><a class="login100-form-btn" th:href="@{/login}" sec:authorize="!isAuthenticated()">Log In</a></li>
+                <li><a class="login100-form-btn" th:href="@{/profile}" sec:authorize="isAuthenticated()">Profile</a></li>
+                <li><a class="login100-form-btn" th:href="@{/logout}" sec:authorize="isAuthenticated()">Log Out</a></li>
+            </ul>
+
+
+        </div>
+    </div>
+</nav>
+
+ <div id="home">
+ <div class="crossfade">
+         <figure></figure>
+         <figure></figure>
+         <figure></figure>
+         <figure></figure>
+         <figure></figure>
+     </div>
+
+  <div class="landing-text">
+   <img src="home-template/images/logo_invert.png" height="185" width="465" class="img-responsive">
+        <br/>
+        <br/>
+    <a class="getStartedButton" th:href="@{/register}">Get Started!</a>
+  </div>
+ </div>
+
+
+<div class="padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6"><img src="home-template/images/eye.png" style="box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);"></div>
+            <div class="col-sm-6 text-center">
+                <h2 style="font-family: Arvo; font-weight: bold">Who we are and what we do</h2>
+                <br/>
+                <p class="lead" style="font-family: Arvo; color: black">
+                Simply put, we believe anyone can share their journeys in all kinds of ways.
+                Ours just happens to be recording light or other electromagnetic radiation!
+                </p>
+
+                <p class="lead" style="font-family: Arvo; color: black">
+                Photographs are return tickets to the past and photography is an art that can make us fall in love with our surroundings.
+                </p>
+                <p class="lead" style="font-family: Arvo; color: black">
+                <i>"When people ask me what equipment I use - I tell them my eyes."</i>
+                <br/>
+                - Anonymous
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="fixed">
+</div>
+
+<div class="padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <h4 style="font-family: Arvo; font-weight: bold">Tarkan</h4>
+                <p style="font-family: Arvo">
+                Although my field is entirely different, I've always been passionate about photography.
+                After all, it's my primary hobby.
+                </p>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <img src="images/tarkan.png" style="box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);" class="img-responsive">
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <h4 style="font-family: Arvo; font-weight: bold">Puffle5</h4>
+                 <p style="font-family: Arvo">
+                 help me Jesus
+                 </p>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <img src="images/cupcake.png" style="box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);" class="img-responsive">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<footer class="container-fluid text-center">
+    <div class="container">
+
+            <div class="col-sm-4">
+            <h3>Connect With Us!</h3>
+            <a href="https://www.facebook.com/tarkan.halvadzhiev" class="fa fa-facebook"></a>
+            <a href="https://www.instagram.com/tarkan.halvadzhiev/?hl=en" class="fa fa-instagram"></a>
+            <a href="https://www.youtube.com/watch?v=du6hrPIyOsE" class="fa fa-youtube"></a>
+            </div>
+
+            <div class="col-sm-4">
+            <img src="home-template/images/logo_invert_footer.png" class="icon" onclick="playAudio('/../images/illumni.mp3')" />
+            </div>
+
+        <div class="col-sm-4">
+        <h3 class="padded">Our Sponsors</h3>
+        <a class="something" href="https://www.telerikacademy.com">The Good</a>
+        <br/>
+        <a class="something" href="https://www.uni-sofia.bg">The Bad</a>
+        <br/>
+        <a class="something" href="https://tu-sofia.bg">The Ugly</a>
+        </div>
+
+
+    </div>
+</footer>
+
+<script th:src="@{scripts/requests-script.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<title>Profile</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css}" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{https://www.w3schools.com/w3css/4/w3.css}">
+<link rel="stylesheet" th:href="@{https://www.w3schools.com/lib/w3-theme-blue-grey.css}">
+<link rel='stylesheet' th:href='@{https://fonts.googleapis.com/css?family=Open+Sans}'>
+<link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/settings/settings.css}">
+<link rel="stylesheet" th:href="@{/profile-template/css/profile.css}">
+<link rel="stylesheet" th:href="@{/home-template/style.css}">
+<link rel="stylesheet" th:href="@{/styles/test.css}">
+
+<body class="w3-theme-l5">
+
+<div class="BGimage"></div>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-main">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a th:href="@{/}"><img id="illLogo" src="/images/logo_invert_small.png" height="60" width="40"></a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-main">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="profile-button" th:href="@{/swagger-ui.html}">API</a></li>
+                <li><a class="profile-button" th:href="@{/profile/new-feeds}">News Feed</a></li>
+                <li><a class="profile-button" th:href="@{/admin}" sec:authorize="hasRole('ROLE_ADMIN')">Admin Panel</a></li>
+                <li><a class="profile-button" th:href="@{/profile}">Profile</a></li>
+                <li><a class="profile-button" th:href="@{/profile/settings}">Settings</a></li>
+                <li><a class="profile-button" th:href="@{/logout}">Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br/>
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+    <!-- The Grid -->
+    <div class="w3-row">
+        <!-- Left Column -->
+        <div class="w3-col m3">
+            <!-- Profile -->
+
+            <div class="author-card pb-3 fadeInLeft">
+
+                <div class="author-card-cover"><img class="author-card-cover"
+                                                    th:src="@{'/images/' + ${user.coverPhotoURL}}" src="image.jpg"
+                                                    th:alt="${user.username}"></div>
+                <div class="author-card-profile"></div>
+                <div class="author-card-profile">
+                    <div class="author-card-avatar"><img th:src="@{'/images/' + ${user.photoURL}}" src="image.jpg"
+                                                         alt="Daniel Adams">
+                    </div>
+                    <div class="author-card-details">
+                        <h4 class="author-card-name text-lg" th:text="${user.username}"></h4>
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+
+
+            <div id="button-accept-decline" class="w3-half w3-button w3-blue" th:value="${user.username}"
+                 onclick="burn()">
+                Connect
+            </div>
+
+            <br>
+            <!-- End Left Column -->
+        </div>
+
+        <!-- Middle Column -->
+        <div class="w3-col m7" id="other-profile-posts">
+
+
+            <!-- End Middle Column -->
+        </div>
+
+        <!-- End Page Container -->
+    </div>
+    <br>
+</div>
+<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js}"></script>
+<script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
+<script th:src="@{/scripts/other-profile-script.js}"></script>
+<script th:src="@{/scripts/check-like-script.js}"></script>
+<script th:src="@{/scripts/setting-script.js}"></script>
+<script th:src="@{/scripts/requests-script.js}"></script>
+<script th:inline="javascript">
+
+    let user = [[${user.username}]];
+    let userID = [[${user.ID}]];
+
+    $(window).on('load', function () {
+        check(user);
+        console.log(userID);
+        publicOtherPersonPosts(userID);
+    });
+
+    function burn() {
+        connectOrDisconnect(user);
+    }
+</script>
+
+</body>
+</html>

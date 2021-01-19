@@ -1,0 +1,232 @@
+html, body
+{
+    height: 100%;
+    width: 100%;
+}
+
+
+
+.navbar
+{
+    background-image: url("headerBG.png");
+    background-size: auto 100%;
+    background-repeat: repeat-x;
+    padding: 0.9% 0;
+    font-weight: bold;
+    border: 0;
+    opacity: 0.7;
+    -webkit-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    overflow: hidden;
+}
+
+.navbar.hide-nav {
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.navbar-brand
+{
+    min-height: 55px;
+    position:relative;
+    top:-5px;
+}
+
+navbar-default
+{
+    text-shadow: none;
+    background:none;
+    color: #D5D5D5;
+    margin-right: 15px;
+    width: auto;
+    font-size: medium;
+    border-bottom: 2px solid rgba(220,235,250,0.7);
+    border-bottom-right-radius: 15px;
+    border-top: 2px solid rgba(220,235,250,0.7);
+    border-top-left-radius: 15px;
+    position: fixed;
+}
+
+.navbar-default {
+    background-color: transparent;
+}
+
+.navbar-default .navbar-nav li a:hover, .navbar-default .navbar-nav li a:active
+{
+    color: #FFF;
+    text-shadow: 2px 2px #002752;
+    background-image: linear-gradient(to right, #062c33 , #9fcdff);
+}
+
+#home
+{
+    display: table;
+    height: 100%;
+    position: relative;
+    width: 100%;
+    background-size: cover;
+    z-index: 1;
+}
+
+.crossfade > figure {
+    animation: imageAnimation 30s linear infinite 0s;
+    backface-visibility: hidden;
+    background-size: cover;
+    background-position: center center;
+    color: transparent;
+    height: 100%;
+    left: 0px;
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    z-index: 0;
+}
+
+.crossfade > figure:nth-child(1) {
+    background: url(/home-template/images/1.JPG) no-repeat center center fixed;
+}
+
+.crossfade > figure:nth-child(2) {
+    animation-delay: 6s;
+    background-image: url(/home-template/images/2.JPG);
+}
+
+.crossfade > figure:nth-child(3) {
+    animation-delay: 12s;
+    background-image: url(/home-template/images/3.JPG);
+}
+
+.crossfade > figure:nth-child(4) {
+    animation-delay: 18s;
+    background-image: url(/home-template/images/4.JPG);
+}
+
+.crossfade > figure:nth-child(5) {
+    animation-delay: 24s;
+    background-image: url(/home-template/images/5.JPG);
+}
+
+/*fade*/
+@keyframes
+imageAnimation {
+    0% {
+        animation-timing-function: ease-in;
+        opacity: 0;
+    }
+    8% {
+        animation-timing-function: ease-out;
+        opacity: 1;
+    }
+    17% {
+        opacity: 1
+    }
+    25% {
+        opacity: 0
+    }
+    100% {
+        opacity: 0
+    }
+}
+
+.landing-text
+{
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    top: 32%;
+}
+
+.landing-button
+{
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+
+}
+
+.landing-text h1
+{
+    font-size: 500%;
+    font-weight: 700;
+}
+
+.padding
+{
+    background-color: #f8f9fa;
+    padding: 30px 0;
+}
+
+.padding img
+{
+    width: 100%;
+}
+
+#fixed
+{
+    background: url(/home-template/images/Dark_2.jpg) no-repeat center center fixed;
+    display: table;
+    height: 50%;
+    position: relative;
+    width: 100%;
+    background-size: cover;
+}
+
+footer
+{
+    width: 100%;
+    background-color: black;
+    padding: 10px 10px 10px 10px;
+    color: #FFF;
+    display: inline-block;
+}
+
+.fa
+{
+    padding: 10px;
+    font-size: 25px;
+    color: #FFF;
+}
+
+.fa:hover
+{
+    color: #D5D5D5;
+    text-decoration: none;
+}
+
+.icon 
+{
+    max-width: 200px;
+    
+}
+
+.something
+{
+    font-size: 15px;
+    color: inherit;
+}
+
+.padded
+{
+    margin-bottom: 4px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav>li>a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white;
+}

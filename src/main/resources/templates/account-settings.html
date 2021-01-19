@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css}" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{https://www.w3schools.com/w3css/4/w3.css}">
+    <link rel="stylesheet" th:href="@{https://www.w3schools.com/lib/w3-theme-blue-grey.css}">
+    <link rel='stylesheet' th:href='@{https://fonts.googleapis.com/css?family=Open+Sans}'>
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/settings/settings.css}">
+    <link rel="stylesheet" th:href="@{/profile-template/css/profile.css}">
+    <link rel="stylesheet" th:href="@{/home-template/style.css}">
+    <link rel="stylesheet" th:href="@{/styles/test.css}">
+
+</head>
+<body>
+<div class="BGimage"></div>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-main">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a th:href="@{/}"><img id="illLogo" src="../images/logo_invert_small.png" height="60" width="40"></a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-main">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="profile-button" th:href="@{/swagger-ui.html}">API</a></li>
+                <li><a class="profile-button" th:href="@{/profile/new-feeds}">News Feed</a></li>
+                <li><a class="profile-button" th:href="@{/admin}" sec:authorize="hasRole('ROLE_ADMIN')">Admin Panel</a></li>
+                <li><a class="profile-button" th:href="@{/profile}">Profile</a></li>
+                <li><a class="profile-button" th:href="@{/logout}">Log Out</a></li>
+            </ul>
+
+
+        </div>
+    </div>
+</nav>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<div class="container mt-5" >
+    <div class="row">
+        <div class="col-lg-4 pb-5">
+            <!-- Account Sidebar-->
+            <div class="author-card pb-3 fadeInLeft">
+
+                <div class="author-card-cover"><img id="cover-picture" class="author-card-cover"
+                                                    th:src="@{'/images/' + ${user.coverPhotoURL}}" src="image.jpg"
+                                                    alt="Daniel Adams"></div>
+                <div class="author-card-profile"></div>
+                <div class="author-card-profile">
+                    <div class="author-card-avatar"><img id="profile-photo" th:src="@{'/images/' + ${user.photoURL}}" src="image.jpg"
+                                                         th:alt="${user.username}">
+                    </div>
+                    <div class="author-card-details">
+                        <h5 class="author-card-name text-lg" th:text="${user.username}"></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="wizard">
+                <nav class="list-group list-group-flush">
+
+
+
+                </nav>
+            </div>
+        </div>
+        <!-- Profile Settings-->
+        <div class="col-lg-8 pb-5 fadeIn">
+                <div class="col-md-6">
+                    <div class="form-group centered whiteText">
+                        <label for="username">User Name</label>
+                        <input class="form-control" type="text" maxlength="30" id="username" th:value="${user.username}" disabled="">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center">
+                        <button id="change-profile-info" onclick="changeProfileInfo()"
+                                class="btn btn-style-1 btn-primary"
+                                type="button" data-toast=""
+                                data-toast-position="topRight" data-toast-type="success"
+                                data-toast-icon="fe-icon-check-circle" data-toast-title="Success!"
+                                data-toast-message="Your profile updated successfuly.">Update Profile
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <br/>
+
+            <header style="float:left;">
+                <label class="whiteText">Update Profile Picture</label>
+                <form method="POST" enctype="multipart/form-data" id="fileUploadForm" class="fadeIn">
+                    <input type="file" name="files"  class="whiteText"/>
+                    <input type="submit" value="Submit" id="upload-profile"/>
+                </form>
+                <br>
+                <label class="whiteText">Update Cover Picture</label>
+                <form method="POST" enctype="multipart/form-data" id="cover-upload" class="fadeIn">
+                    <input type="file" name="files"  class="whiteText"/>
+                    <input type="submit" value="Submit" id="upload-cover"/>
+                </form>
+
+            </header>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js}"></script>
+<script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js}"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
+
+<script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script th:src="@{/scripts/setting-script.js}"></script>
+<script th:src="@{/scripts/requests-script.js}"></script>
+
+</body>
+</html>
